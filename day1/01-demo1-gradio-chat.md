@@ -309,9 +309,11 @@ import requests
 def chat_direct(message, history):
     # 构建 Ollama 的 /api/chat 接口请求
     messages = []
-    for user_msg, ai_msg in history:
-        messages.append({"role": "user", "content": user_msg})
-        messages.append({"role": "assistant", "content": ai_msg})
+    for msg in history:
+        if msg["role"] == "user":
+            messages.append({"role": "user", "content": msg["content"]})
+        elif msg["role"] == "assistant":
+            messages.append({"role": "assistant", "content": msg["content"]})
     messages.append({"role": "user", "content": message})
 
     response = requests.post(
