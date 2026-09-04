@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(*)",
+      "WebFetch(*)",
+      "Bash(npm install:*)",
+      "Bash(cat /var/folders/n_/f172bmg52hj67fwkr3mzb_jw0000gp/T/qoder-cli-cn-502/-Users-hd-qodercli-esxi-learning/c5a208ff-ae77-4645-9f36-c36aa6b90c8a/tasks/b3yuj57k0.output 2>/dev/null | tail -20)",
+      "Bash(curl -fsSL https://pi.dev/install.sh | sh)",
+      "Bash(pi:*)"
+    ]
+  }
+}
