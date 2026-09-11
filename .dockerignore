@@ -1,0 +1,12 @@
+.git
+.venv
+.env
+.data
+.gradio
+__pycache__
+*.egg-info
+.pytest_cache
+.ruff_cache
+01-infra
+.qoder
+tests

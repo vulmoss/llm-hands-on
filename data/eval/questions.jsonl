@@ -1,0 +1,5 @@
+{"question":"推理服务和应用分别负责什么？","kind":"direct","expected_sources":["lab.md"],"expected":"推理服务加载模型和推理；应用组装消息、检索和执行工具。"}
+{"question":"为什么机器人能接着上一句话回答？","kind":"paraphrase","expected_sources":["concepts.md"],"expected":"应用重新发送历史消息作为上下文。"}
+{"question":"修改学习资料后如何让问答使用新内容？","kind":"direct","expected_sources":["lab.md"],"expected":"重新运行 index 构建索引。"}
+{"question":"1 GiB 等于多少 MiB？","kind":"direct","expected_sources":["concepts.md"],"expected":"1024 MiB。"}
+{"question":"本实验室的 GPU 序列号是什么？","kind":"unanswerable","expected_sources":[],"expected":"根据已有信息无法回答。"}
