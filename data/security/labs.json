@@ -1,0 +1,31 @@
+{
+  "labs": [
+    {
+      "id": "rag-injection",
+      "title": "RAG 文档注入与正常对照",
+      "entrypoint": "05-security/rag-injection/README.md",
+      "offline_command": "python -m pytest -q tests/security/test_security_eval.py",
+      "live_command": "python -m llm_lab security-eval --cases data/security/benign.jsonl data/security/rag-injection.jsonl --output .data/security/baseline.json",
+      "model_status": "pending",
+      "report": "reports/security/baseline.md"
+    },
+    {
+      "id": "agent-boundaries",
+      "title": "Agent 工具执行边界",
+      "entrypoint": "05-security/agent-boundaries/README.md",
+      "offline_command": "python -m pytest -q tests/security/test_agent_boundaries.py",
+      "live_command": null,
+      "model_status": "not_applicable",
+      "report": "reports/security/baseline.md"
+    },
+    {
+      "id": "promptfoo-api",
+      "title": "Promptfoo 本地 API 接入",
+      "entrypoint": "05-security/integrations/promptfoo/README.md",
+      "offline_command": "python -m pytest -q tests/security/test_promptfoo_contract.py",
+      "live_command": "promptfoo eval --config 05-security/integrations/promptfoo/config.json --max-concurrency 1 --no-cache",
+      "model_status": "pending",
+      "report": "reports/security/baseline.md"
+    }
+  ]
+}

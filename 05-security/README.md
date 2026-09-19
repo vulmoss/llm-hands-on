@@ -2,6 +2,16 @@
 
 本章围绕现有代码做本地防护练习，不要求额外目标环境。
 
+## 可运行实验
+
+入口见 [自动生成的实验目录](LABS.md)，验证状态见 [基线记录](../reports/security/baseline.md)。
+
+- [RAG 文档注入](rag-injection/README.md)：10 组配对样例、独立内存索引、JSON 证据和显式错误统计。
+- [Agent 执行边界](agent-boundaries/README.md)：模型提出错误调用时，确认实际函数没有执行。
+- [Promptfoo API 接入](integrations/promptfoo/README.md)：检查聊天、RAG 来源和 Agent trace。
+
+没有模型服务时先做离线检查；不要把模拟响应得出的结果写成模型成绩。
+
 ## 当前实现
 
 - 计算器使用枚举运算，不使用 `eval` 或执行模型生成的代码。

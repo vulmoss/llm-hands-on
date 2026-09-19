@@ -1,0 +1,63 @@
+{
+  "description": "LLM Hands-on 本地 API 契约与回答烟雾检查；不使用模型评分器",
+  "prompts": [
+    "{{question}}"
+  ],
+  "providers": [
+    {
+      "id": "http",
+      "config": {
+        "url": "http://127.0.0.1:8000/{{route}}",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "question": "{{prompt}}"
+        },
+        "transformResponse": "JSON.stringify(json)"
+      }
+    }
+  ],
+  "tests": [
+    {
+      "description": "聊天返回答案",
+      "vars": {
+        "route": "chat",
+        "question": "只输出数字 42。"
+      },
+      "assert": [
+        {
+          "type": "javascript",
+          "value": "JSON.parse(output).answer.includes('42')"
+        }
+      ]
+    },
+    {
+      "description": "RAG 返回答案和候选来源",
+      "vars": {
+        "route": "rag",
+        "question": "1 GiB 等于多少 MiB？"
+      },
+      "assert": [
+        {
+          "type": "javascript",
+          "value": "JSON.parse(output).answer.includes('1024') && JSON.parse(output).sources.length > 0"
+        }
+      ]
+    },
+    {
+      "description": "检查 Agent 实际工具轨迹",
+      "vars": {
+        "route": "agent",
+        "question": "使用计算器计算 6 乘以 7。"
+      },
+      "assert": [
+        {
+          "type": "javascript",
+          "value": "JSON.parse(output).stopped === false && JSON.parse(output).trace.some(t => t.tool === 'calculator' && t.result.ok === true && t.result.data.result === 42)"
+        }
+      ]
+    }
+  ]
+}

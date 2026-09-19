@@ -48,6 +48,12 @@ def parser() -> argparse.ArgumentParser:
     bench = commands.add_parser("benchmark", help="输出包含真实客户端延迟的 JSON 实验记录")
     bench.add_argument("question")
     bench.add_argument("--repeat", type=int, default=3)
+    security = commands.add_parser("security-eval", help="校验或运行固定 RAG 安全样例")
+    security.add_argument("--cases", type=Path, nargs="+", required=True)
+    security.add_argument("--check", action="store_true", help="仅离线校验，不连接模型")
+    security.add_argument("--output", type=Path, help="新建 JSON 证据文件，不覆盖已有文件")
+    security.add_argument("--repeat", type=int, default=1)
+    security.add_argument("--label", default="baseline")
     for name, default_port in [("ui", 7860), ("serve", 8000)]:
         command = commands.add_parser(
             name, help="启动网页聊天" if name == "ui" else "启动 HTTP API"
@@ -155,6 +161,10 @@ def dispatch(args, settings: Settings, client) -> int:
         if not 1 <= args.repeat <= 100:
             raise ValueError("repeat 必须在 1 到 100 之间")
         dump([{"run": i + 1, **benchmark(client, args.question)} for i in range(args.repeat)])
+    elif args.command == "security-eval":
+        from .security_eval import run_evaluation
+
+        return run_evaluation(args, client)
     elif args.command == "ui":
         from .ui import launch
 
@@ -171,6 +181,12 @@ def dispatch(args, settings: Settings, client) -> int:
 def main(argv=None) -> int:
     args = parser().parse_args(argv)
     try:
+        if args.command == "security-eval" and args.check:
+            from .security_eval import load_cases
+
+            cases = load_cases(args.cases)
+            dump({"cases": len(cases), "validation": "passed", "model_evaluation": "not_run"})
+            return 0
         settings = Settings.from_env()
         return dispatch(args, settings, OllamaClient(settings))
     except ImportError as exc:

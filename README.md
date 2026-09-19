@@ -1,10 +1,14 @@
 # LLM Hands-on：从一次请求到文档助手
 
 面向有少量 Python 基础的 AI 初学者。通过可观察、可测试的小步骤学习：
-**HTTP 请求 → 多轮聊天 → 模型实验 → RAG → Agent → API / 网页。**
+**HTTP 请求 → 多轮聊天 → 模型实验 → RAG → Agent → API / 网页 → 安全实验。**
 
 核心代码只依赖 Python 标准库，Gradio 和 FastAPI 按需安装。所有入口共用同一套配置和业务逻辑。
 原有 ESXi 操作记录保留在 `01-infra/`，已有的三组 demo 路径保留为兼容入口。
+
+安全实操从 [实验目录](05-security/LABS.md) 开始：包含 10 组 RAG 正常/注入对照、
+Agent 执行边界回归和 Promptfoo API 适配。
+[基线记录](reports/security/baseline.md) 区分离线工程验证与尚待完成的真实模型评估。
 
 ## 1. 安装与配置
 
@@ -62,6 +66,7 @@ llm-lab chat
 | RAG | `examples/03_rag.py`、`src/llm_lab/rag.py` | 分清检索失败与生成失败，展示原始片段 |
 | Agent | `examples/04_agent.py`、`src/llm_lab/agent.py` | 看懂工具参数、结果回传和停止原因 |
 | 工程化 | [04-engineering](04-engineering/README.md) | 新环境可启动，故障有清晰反馈 |
+| 安全实验 | [05-security](05-security/LABS.md) | 保存固定样例的结果，区分模型行为与执行器边界 |
 
 每次实验只改一个变量，记录预期、实际输出和解释。不要用一次回答判断模型能力。
 完整练习清单见 [学习与实验手册](docs/learning.md)。
@@ -143,7 +148,22 @@ docs/             架构、学习和迁移说明
 设计取舍与扩展位置见 [架构说明](docs/architecture.md)，旧版用法变化见
 [迁移说明](docs/migration.md)。
 
-## 7. 验证
+## 7. 安全实验
+
+模型环境不可用时，可以先检查样例、执行器和实验导航：
+
+```bash
+python -m llm_lab security-eval --cases data/security/benign.jsonl data/security/rag-injection.jsonl --check
+python -m pytest -q tests/security
+python scripts/gen_security_catalog.py --check
+```
+
+`--check` 不连接模型。真实 RAG 评估、指标解释和前后对照见
+[RAG 文档注入实验](05-security/rag-injection/README.md)；
+API 接入见 [Promptfoo 配置](05-security/integrations/promptfoo/README.md)。
+模型测试结果保存到 `.data/security/`，目录清单保存在 `data/security/labs.json`。
+
+## 8. 验证
 
 ```bash
 python -m pip install -e '.[api,ui,dev]'
