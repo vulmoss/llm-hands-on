@@ -28,7 +28,8 @@ pythonpath = ["src"]
 [tool.ruff]
 target-version = "py310"
 line-length = 100
-extend-exclude = ["01-infra"]
+# Preserve the imported upstream reference text, including its code examples.
+extend-exclude = ["01-infra", "05-security/prompt-library/Skills"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]

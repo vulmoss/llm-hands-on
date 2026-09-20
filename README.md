@@ -9,6 +9,8 @@
 安全实操从 [实验目录](05-security/LABS.md) 开始：包含 10 组 RAG 正常/注入对照、
 Agent 执行边界回归和 Promptfoo API 适配。
 [基线记录](reports/security/baseline.md) 区分离线工程验证与尚待完成的真实模型评估。
+另有 [ChatGPT / Codex 安全提示词库](05-security/prompt-library/README.md)：
+包含 79 个可按需使用的技能资料、中文提示词和导出 / 安装工具。
 
 ## 1. 安装与配置
 

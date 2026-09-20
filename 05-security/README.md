@@ -12,6 +12,17 @@
 
 没有模型服务时先做离线检查；不要把模拟响应得出的结果写成模型成绩。
 
+## ChatGPT / Codex 提示词库
+
+[prompt-library](prompt-library/README.md) 收录从 Claude-Red 适配的 79 个技能资料，
+可用于研究方法参考、代码审计和报告整理。它是独立的提示词资料模块。
+
+- **ChatGPT**：复制 [中文提示词](prompt-library/prompts/CHATGPT.md)，上传任务需要的资料。
+- **Codex**：在项目根目录运行 `bash 05-security/prompt-library/install.sh --target .agents/skills --category utility`。
+- **离线校验**：运行 `python3 -m unittest discover -s 05-security/prompt-library/tests`。
+
+完整资料、来源署名和 MIT 许可证保留在模块目录；提示词不会自动接入模型服务或提供执行工具。
+
 ## 当前实现
 
 - 计算器使用枚举运算，不使用 `eval` 或执行模型生成的代码。
