@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
+    environment:
+      APP_ORIGIN: ${APP_ORIGIN:-http://127.0.0.1:3000}
+      DATABASE_PATH: ${DATABASE_PATH:-/app/.data/taskboard.sqlite}
+    volumes:
+      - taskboard-data:/app/.data
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+      start_period: 15s
+volumes:
+  taskboard-data:

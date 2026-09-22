@@ -1,9 +1,14 @@
-# LLM Hands-on：从一次请求到文档助手
+# LLM Hands-on：从一次请求到全栈应用
 
 面向有少量 Python 基础的 AI 初学者。通过可观察、可测试的小步骤学习：
 **HTTP 请求 → 多轮聊天 → 模型实验 → RAG → Agent → API / 网页 → 安全实验。**
 
-核心代码只依赖 Python 标准库，Gradio 和 FastAPI 按需安装。所有入口共用同一套配置和业务逻辑。
+新增 [16 阶段全栈工程路线](07-fullstack/README.md)：从 HTML / CSS / JavaScript 到 React、
+Next.js、数据库、认证、测试、Docker 和部署。配套 [最小全栈学习看板](07-fullstack/taskboard/README.md)
+支持注册登录、个人任务管理和阶段进度，无需模型服务即可运行。
+
+LLM 实验室的 Python 核心只依赖标准库，Gradio 和 FastAPI 按需安装，共用配置和业务逻辑。
+新增全栈项目使用独立的 Node.js 依赖与数据库，启动方式见对应目录。
 原有 ESXi 操作记录保留在 `01-infra/`，已有的三组 demo 路径保留为兼容入口。
 
 安全实操从 [实验目录](05-security/LABS.md) 开始：包含 10 组 RAG 正常/注入对照、
@@ -74,6 +79,7 @@ llm-lab chat
 | Agent | `examples/04_agent.py`、`src/llm_lab/agent.py` | 看懂工具参数、结果回传和停止原因 |
 | 工程化 | [04-engineering](04-engineering/README.md) | 新环境可启动，故障有清晰反馈 |
 | 安全实验 | [05-security](05-security/LABS.md) | 保存固定样例的结果，区分模型行为与执行器边界 |
+| 全栈工程 | [07-fullstack](07-fullstack/README.md) | 从零启动带认证和数据库的应用，完成测试与持久化验收 |
 
 每次实验只改一个变量，记录预期、实际输出和解释。不要用一次回答判断模型能力。
 完整练习清单见 [学习与实验手册](docs/learning.md)。

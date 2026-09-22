@@ -23,5 +23,9 @@ llm-lab ui
 
 优先增加 RAG 证据展示：原文、相似度、文件名和片段位置。
 之后再增加工具执行记录面板和实验结果对比。
-需要学习独立前端时，可调用 `llm-lab serve` 的 API；当前没有 Next.js 实现。
-API 目前返回完整 JSON，如需独立前端流式体验，应先实现并测试 SSE 接口。
+需要学习 React / TypeScript / Next.js 时，从新增的 [全栈路线](../07-fullstack/README.md) 开始。
+其中 [学习任务看板](../07-fullstack/taskboard/README.md) 已实现独立的页面、REST API、认证和数据库，
+不依赖模型服务，适合先建立完整交付经验。
+
+原 `llm-lab serve` 的模型 API 仍返回完整 JSON；将看板扩展为 LLM 前端时，应由服务端调用该 API。
+如需流式体验，再单独实现和测试 SSE 接口。具体扩展任务见 [阶段 15](../07-fullstack/units/15-real-project.md)。

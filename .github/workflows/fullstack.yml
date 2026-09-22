@@ -1,0 +1,65 @@
+name: fullstack
+on:
+  push:
+    paths: ['07-fullstack/**', '.github/workflows/fullstack.yml']
+  pull_request:
+    paths: ['07-fullstack/**', '.github/workflows/fullstack.yml']
+permissions:
+  contents: read
+
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: 07-fullstack/taskboard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: 07-fullstack/taskboard/package-lock.json
+      - run: npm ci
+      - run: npm run check
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: fullstack-browser-report
+          path: |
+            07-fullstack/taskboard/playwright-report/
+            07-fullstack/taskboard/test-results/
+          retention-days: 7
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: 07-fullstack/taskboard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: docker compose config --quiet
+      - run: docker compose up --build -d --wait
+      - name: Real HTTP and restart persistence
+        env:
+          SMOKE_STATE: ${{ runner.temp }}/taskboard-smoke-state.json
+        run: |
+          node scripts/smoke.mjs
+          docker compose restart app
+          docker compose up -d --wait
+          node scripts/smoke.mjs --verify
+      - name: Backup inside the runtime image
+        run: docker compose exec -T app node scripts/backup.mjs .data/backups/ci.sqlite
+      - run: docker compose logs --no-color --tail=100 app
+        if: failure()
+      - run: docker compose down
+        if: always()
