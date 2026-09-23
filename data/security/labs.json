@@ -26,6 +26,24 @@
       "live_command": "promptfoo eval --config 05-security/integrations/promptfoo/config.json --max-concurrency 1 --no-cache",
       "model_status": "pending",
       "report": "reports/security/baseline.md"
+    },
+    {
+      "id": "web-security-controls",
+      "title": "Web 安全 12 组漏洞与修复对照",
+      "entrypoint": "05-security/web-ai-course/README.md",
+      "offline_command": "python -m pytest -q tests/security/test_web_course.py",
+      "live_command": null,
+      "model_status": "not_applicable",
+      "report": "reports/security/web-ai-course.md"
+    },
+    {
+      "id": "web-ai-evidence-review",
+      "title": "Ollama 审阅 Web 实验证据",
+      "entrypoint": "05-security/web-ai-course/units/02-ai-workflow.md",
+      "offline_command": "python -m llm_lab.web_security run --lab idor --output .data/web-ai-course/idor.json",
+      "live_command": "python -m llm_lab.web_security review --evidence .data/web-ai-course/idor.json --live",
+      "model_status": "pending",
+      "report": "reports/security/web-ai-course.md"
     }
   ]
 }

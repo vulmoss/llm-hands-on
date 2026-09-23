@@ -11,6 +11,10 @@ LLM 实验室的 Python 核心只依赖标准库，Gradio 和 FastAPI 按需安�
 新增全栈项目使用独立的 Node.js 依赖与数据库，启动方式见对应目录。
 原有 ESXi 操作记录保留在 `01-infra/`，已有的三组 demo 路径保留为兼容入口。
 
+新增 [Web × AI 安全学习路线](05-security/web-ai-course/README.md)：根据两张课程大纲整理的
+12 周学习、12 组本地漏洞/修复对照、前端分析、Ollama 证据审阅与 ESXi 环境操作流程。
+先运行 `PYTHONPATH=src python3 -m llm_lab.web_security run --all`，再按课程逐项学习。
+
 安全实操从 [实验目录](05-security/LABS.md) 开始：包含 10 组 RAG 正常/注入对照、
 Agent 执行边界回归和 Promptfoo API 适配。
 [基线记录](reports/security/baseline.md) 区分离线工程验证与尚待完成的真实模型评估。

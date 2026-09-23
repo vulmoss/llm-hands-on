@@ -1,0 +1,5 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>本地前端安全练习</title>
+<style>body{font:18px system-ui;max-width:850px;margin:60px auto;padding:20px;line-height:1.7}button,a{margin:8px}pre{white-space:pre-wrap;background:#eee;padding:16px}</style>
+<h1>前端可见 ≠ 后端授权</h1><p>登录后查看两个合成用户的订单；在 Network 观察状态码。</p>
+<button id="login">教学登录 Alice</button><button id="mine">订单 1</button><button id="other">订单 2</button><button id="lazy">动态加载模块</button><pre id="result">等待请求</pre>
+<h2>DOM 对照</h2><p>URL 使用 <code>?mode=vulnerable#%3Cb%3ELAB%3C%2Fb%3E</code>，再改为 <code>?mode=fixed</code> 比较粗体标记。</p><div id="sink"></div><script type="module" src="/frontend/app.js"></script></html>

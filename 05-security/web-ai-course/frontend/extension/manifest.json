@@ -1,0 +1,1 @@
+{"manifest_version":3,"name":"Local Lab Surface Notes","version":"1.0.0","description":"Lists local teaching page script URLs only","permissions":["activeTab","scripting"],"action":{"default_popup":"popup.html"}}

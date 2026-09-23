@@ -61,7 +61,7 @@ def render(labs: list[dict]) -> str:
         entry = os.path.relpath(ROOT / lab["entrypoint"], ROOT / "05-security")
         report = os.path.relpath(ROOT / lab["report"], ROOT / "05-security")
         status = (
-            "待环境恢复后验证" if lab["model_status"] == "pending" else "无需模型（执行器回归）"
+            "模型实测状态见报告" if lab["model_status"] == "pending" else "无需模型（本地回归）"
         )
         title = lab["title"].replace("|", "\\|")
         lines.append(f"| [{title}]({entry}) | {status} | [验证记录]({report}) |")

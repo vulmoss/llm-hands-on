@@ -2,6 +2,12 @@
 
 本章围绕现有代码做本地防护练习，不要求额外目标环境。
 
+## Web × AI 系统学习
+
+[进入 12 周课程](web-ai-course/README.md)：图片知识点分析、12 组本地 HTTP 对照、前端源码与插件、
+认证授权/云存储/代码审计进阶、适配 .15/.16 的操作流程和报告模板。
+[实测记录](../reports/security/web-ai-course.md) 明确区分 HTTP 测试、浏览器、模型和未执行的进阶课。
+
 ## 可运行实验
 
 入口见 [自动生成的实验目录](LABS.md)，验证状态见 [基线记录](../reports/security/baseline.md)。

@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "app.js",
+  "sources": [
+    "src/course.js"
+  ],
+  "sourcesContent": [
+    "const output = document.querySelector('#result');\nasync function show(response) { output.textContent = `${response.status}\\n${await response.text()}`; }\ndocument.querySelector('#login').onclick = async () => show(await fetch(\"/login\"));\ndocument.querySelector('#mine').onclick = async () => show(await fetch(\"/orders?id=1\"));\ndocument.querySelector('#other').onclick = async () => show(await fetch(\"/orders?id=2\"));\ndocument.querySelector('#lazy').onclick = async () => { const module = await import('./lazy.js'); output.textContent = module.note; };\nconst text = decodeURIComponent(location.hash.slice(1));\nconst sink = document.querySelector('#sink');\nif (new URLSearchParams(location.search).get('mode') === 'vulnerable') { sink.innerHTML = text; }\nelse { sink.textContent = text; }\n// sourceMappingURL=app.js.map\n"
+  ],
+  "names": [],
+  "mappings": ""
+}
