@@ -50,6 +50,7 @@ AI 草稿写入 `.data/web-ai-course/review.md`，不会运行模型输出或改
 |---|---|
 | [图片知识点分析](IMAGE-ANALYSIS.md) | 原图模块逐项映射，重叠内容、营销承诺与学习缺口 |
 | [12 周路线](SYLLABUS.md) | 先修、时间、每周验收、优先级 |
+| [交给其他 Agent 的部署手册](AGENT-DEPLOYMENT.md) | 固定版本、双服务、验收、回滚、离线传输与交接 |
 | [环境与操作流程](OPERATIONS.md) | Mac / .16 部署、SSH 隧道、Burp、排障与清理 |
 | [学习单元](units/01-foundations.md) | 从 HTTP 到联合报告，每课有操作与产物 |
 | [进阶复现流程](ADVANCED.md) | OAuth/SSO、XML、RCE、云签名、并发、框架与多语言 |
