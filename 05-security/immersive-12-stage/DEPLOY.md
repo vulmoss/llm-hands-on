@@ -29,6 +29,7 @@ mkdir -p "$HOME/labs"
 cd "$HOME/labs"
 git clone https://github.com/vulmoss/llm-hands-on.git llm-immersion-source
 cd llm-immersion-source
+git checkout --detach 93b4f074d8cd0636a17e090143ba5324c3220c98
 export COURSE="$PWD/05-security/immersive-12-stage"
 export LAB_STATE="$HOME/labs/immersion-state"
 export PYTHONPATH="$PWD/src"
@@ -43,7 +44,7 @@ systemctl is-active pd-2379.service tikv-20160.service || true
 ss -ltn
 ```
 
-交付归档包含固定版本的代码；在线克隆时以交付说明指定的提交为准，在 clone 后执行 `git checkout --detach 指定的完整SHA` 再保存 code-commit。不要在已有目录反复 clone 或强制覆盖修改。第二次执行时进入原目录，读取已记录的提交与镜像锁；不要自动 pull main。
+代码基线固定为 `93b4f074d8cd0636a17e090143ba5324c3220c98`；上面的 checkout 已指定完整提交。后续仅文档更新不改变这组脚本。不要在已有目录反复 clone 或强制覆盖修改。第二次执行时进入原目录，读取已记录的提交与镜像锁；不要自动 pull main。
 
 记录节点资源与共享服务前置状态到 `$LAB_STATE/evidence/preflight.txt`。若有代理，记录是否影响 registry 和 Ollama，但不要保存带认证信息的代理 URL。
 
