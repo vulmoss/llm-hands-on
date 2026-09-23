@@ -1,0 +1,56 @@
+{
+  "source": "live-model",
+  "fixture": null,
+  "model": "qwen2.5:1.5b",
+  "max_tokens": 768,
+  "temperature": 0.0,
+  "prompt": "v2",
+  "prompt_sha256": "a8557a06198ef44f5d1d70ee6c89f041522c9ed16c6f53f6093494ea94f1c060",
+  "dataset_sha256": "ebe925ce97db86cab3391ab00c24f676375c36d288c67e025d5831805ce80033",
+  "records": [
+    {
+      "id": "idor-positive",
+      "prediction": null,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "raw": "```json\n{\n  \"supported\": false,\n  \"reason\": \"缺少关键证据，无法确定订单2是否属于Alice\"\n}\n```",
+      "seconds": 2.192
+    },
+    {
+      "id": "owner-negative",
+      "prediction": null,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "raw": "supported: false\nreason: 缺失关键证据，无法判断 Alice 是否越权读取订单。",
+      "seconds": 1.275
+    },
+    {
+      "id": "sqli-positive",
+      "prediction": null,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "raw": "```json\n{\n  \"supported\": false,\n  \"reason\": \"缺少关键证据，无法确定是否已得到支持\"\n}\n```",
+      "seconds": 1.478
+    },
+    {
+      "id": "cors-insufficient",
+      "prediction": null,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "raw": "```json\n{\n  \"supported\": false,\n  \"reason\": \"缺少关键证据来证实敏感数据泄露\"\n}\n```",
+      "seconds": 1.299
+    },
+    {
+      "id": "source-map-insufficient",
+      "prediction": null,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "raw": "```json\n{\n  \"supported\": false,\n  \"reason\": \"未发现关键证据，无法证实高危越权\"\n}\n```",
+      "seconds": 1.467
+    }
+  ],
+  "metrics": {
+    "tp": 0,
+    "tn": 0,
+    "fp": 0,
+    "fn": 0,
+    "errors": 5,
+    "total": 5,
+    "accuracy_including_errors": 0.0
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "services": {
+    "db": {
+      "restart": "no",
+      "pids_limit": 256,
+      "labels": {
+        "org.llm-hands-on.course": "immersive-12-stage",
+        "org.llm-hands-on.state": "${LAB_STATE:?Use labctl.py}"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "10m",
+          "max-file": "2"
+        }
+      },
+      "image": "${DB_IMAGE:?Run labctl.py lock}",
+      "platform": "linux/amd64",
+      "profiles": [
+        "dvwa"
+      ],
+      "environment": {
+        "MARIADB_ROOT_PASSWORD": "lab-root-only",
+        "MARIADB_DATABASE": "dvwa",
+        "MARIADB_USER": "dvwa",
+        "MARIADB_PASSWORD": "lab-dvwa-only"
+      },
+      "volumes": [
+        "dvwa-data:/var/lib/mysql"
+      ],
+      "networks": [
+        "dvwa-net"
+      ],
+      "mem_limit": "768m",
+      "cpus": 0.75,
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "healthcheck.sh",
+          "--connect",
+          "--innodb_initialized"
+        ],
+        "interval": "5s",
+        "timeout": "5s",
+        "retries": 24,
+        "start_period": "30s"
+      }
+    },
+    "dvwa": {
+      "restart": "no",
+      "pids_limit": 256,
+      "labels": {
+        "org.llm-hands-on.course": "immersive-12-stage",
+        "org.llm-hands-on.state": "${LAB_STATE:?Use labctl.py}"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "10m",
+          "max-file": "2"
+        }
+      },
+      "image": "${DVWA_IMAGE:?Run labctl.py lock}",
+      "platform": "linux/amd64",
+      "profiles": [
+        "dvwa"
+      ],
+      "environment": {
+        "DB_SERVER": "db",
+        "DB_DATABASE": "dvwa",
+        "DB_USER": "dvwa",
+        "DB_PASSWORD": "lab-dvwa-only",
+        "DEFAULT_SECURITY_LEVEL": "low"
+      },
+      "depends_on": {
+        "db": {
+          "condition": "service_healthy"
+        }
+      },
+      "ports": [
+        "127.0.0.1:4280:80"
+      ],
+      "networks": [
+        "dvwa-net"
+      ],
+      "mem_limit": "512m",
+      "cpus": 0.75,
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "php",
+          "-r",
+          "exit(@file_get_contents(\"http://127.0.0.1/login.php\") === false ? 1 : 0);"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "20s"
+      }
+    },
+    "juice": {
+      "restart": "no",
+      "pids_limit": 256,
+      "labels": {
+        "org.llm-hands-on.course": "immersive-12-stage",
+        "org.llm-hands-on.state": "${LAB_STATE:?Use labctl.py}"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "10m",
+          "max-file": "2"
+        }
+      },
+      "image": "${JUICE_IMAGE:?Run labctl.py lock}",
+      "platform": "linux/amd64",
+      "profiles": [
+        "juice"
+      ],
+      "ports": [
+        "127.0.0.1:4300:3000"
+      ],
+      "networks": [
+        "juice-net"
+      ],
+      "mem_limit": "1024m",
+      "cpus": 1.0,
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "-e",
+          "fetch(\"http://127.0.0.1:3000/\").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "40s"
+      }
+    }
+  },
+  "networks": {
+    "dvwa-net": {
+      "internal": true
+    },
+    "juice-net": {
+      "internal": true
+    }
+  },
+  "volumes": {
+    "dvwa-data": {}
+  }
+}

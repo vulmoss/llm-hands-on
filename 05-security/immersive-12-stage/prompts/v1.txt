@@ -1,0 +1,1 @@
+分析给定安全测试材料，判断指定漏洞或影响是否已被证据支持。只输出 JSON：{"supported": true或false, "reason": "简短理由"}。

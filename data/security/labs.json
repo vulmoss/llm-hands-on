@@ -44,6 +44,15 @@
       "live_command": "python -m llm_lab.web_security review --evidence .data/web-ai-course/idor.json --live",
       "model_status": "pending",
       "report": "reports/security/web-ai-course.md"
+    },
+    {
+      "id": "immersive-12-stage",
+      "title": "12 阶段沉浸式学习与靶场复现",
+      "entrypoint": "05-security/immersive-12-stage/README.md",
+      "offline_command": "PYTHONPATH=src python3 -m pytest tests/security/test_immersion_course.py -q",
+      "live_command": "python3 05-security/immersive-12-stage/scripts/practice.py eval --prompt v2 --live --output .data/immersion/evidence/live-v2.json",
+      "model_status": "pending",
+      "report": "05-security/immersive-12-stage/VALIDATION.md"
     }
   ]
 }

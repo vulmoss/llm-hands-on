@@ -1,0 +1,87 @@
+{
+  "source": "live-model",
+  "events": [
+    {
+      "event": "plan",
+      "summary": "执行计算并转换单位；只使用已注册教学工具"
+    },
+    {
+      "event": "tool_call",
+      "name": "calculator",
+      "arguments": {
+        "a": 2,
+        "b": 10,
+        "operation": "power"
+      }
+    },
+    {
+      "event": "observation",
+      "result": {
+        "ok": true,
+        "data": {
+          "result": 1024.0
+        }
+      }
+    },
+    {
+      "event": "tool_call",
+      "name": "unit_converter",
+      "arguments": {
+        "value": 1,
+        "from_unit": "MiB",
+        "to_unit": "GiB"
+      }
+    },
+    {
+      "event": "observation",
+      "result": {
+        "ok": true,
+        "data": {
+          "value": 0.0009765625,
+          "unit": "GiB"
+        }
+      }
+    },
+    {
+      "event": "stop",
+      "budget_exhausted": false,
+      "answer": "2的10次方是1024，按 MiB 换算成 GiB 是 0.0009765625 GiB。"
+    }
+  ],
+  "seconds": 6.6,
+  "result": {
+    "answer": "2的10次方是1024，按 MiB 换算成 GiB 是 0.0009765625 GiB。",
+    "trace": [
+      {
+        "tool": "calculator",
+        "arguments": {
+          "a": 2,
+          "b": 10,
+          "operation": "power"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "result": 1024.0
+          }
+        }
+      },
+      {
+        "tool": "unit_converter",
+        "arguments": {
+          "value": 1,
+          "from_unit": "MiB",
+          "to_unit": "GiB"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "value": 0.0009765625,
+            "unit": "GiB"
+          }
+        }
+      }
+    ],
+    "stopped": false
+  }
+}

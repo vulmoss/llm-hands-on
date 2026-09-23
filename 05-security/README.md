@@ -8,6 +8,12 @@
 认证授权/云存储/代码审计进阶、适配 .15/.16 的操作流程和报告模板。
 [实测记录](../reports/security/web-ai-course.md) 明确区分 HTTP 测试、浏览器、模型和未执行的进阶课。
 
+## 12 阶段沉浸式学习
+
+[学习时间与完整流程](immersive-12-stage/README.md)：第三张成果图逐项映射，
+包含固定镜像部署、DVWA/Juice Shop、可观察 Agent、五例回归、人工门禁与 90 分验收。
+[部署交接](immersive-12-stage/DEPLOY.md)；[逐阶段操作](immersive-12-stage/STAGES.md)。
+
 ## 可运行实验
 
 入口见 [自动生成的实验目录](LABS.md)，验证状态见 [基线记录](../reports/security/baseline.md)。

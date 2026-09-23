@@ -1,0 +1,25 @@
+{
+  "source": "live-model",
+  "a": {
+    "tp": 0,
+    "tn": 2,
+    "fp": 1,
+    "fn": 2,
+    "errors": 0,
+    "total": 5,
+    "accuracy_including_errors": 0.4
+  },
+  "b": {
+    "tp": 0,
+    "tn": 0,
+    "fp": 0,
+    "fn": 0,
+    "errors": 5,
+    "total": 5,
+    "accuracy_including_errors": 0.0
+  },
+  "accuracy_delta": -0.4,
+  "seconds_a": 12.313,
+  "seconds_b": 7.711,
+  "note": "5 条已知样例仅回归；不能据此证明泛化能力或真实漏洞检出率。"
+}

@@ -15,6 +15,9 @@ LLM 实验室的 Python 核心只依赖标准库，Gradio 和 FastAPI 按需安�
 12 周学习、12 组本地漏洞/修复对照、前端分析、Ollama 证据审阅与 ESXi 环境操作流程。
 先运行 `PYTHONPATH=src python3 -m llm_lab.web_security run --all`，再按课程逐项学习。
 
+新增 [12 阶段沉浸式复现手册](05-security/immersive-12-stage/README.md)：130–180 小时学习预算、
+DVWA/Juice Shop 环境、逐阶段命令、Agent 回归与毕业评分；[部署交接](05-security/immersive-12-stage/DEPLOY.md) 可交给下一位 agent 执行。
+
 安全实操从 [实验目录](05-security/LABS.md) 开始：包含 10 组 RAG 正常/注入对照、
 Agent 执行边界回归和 Promptfoo API 适配。
 [基线记录](reports/security/baseline.md) 区分离线工程验证与尚待完成的真实模型评估。
